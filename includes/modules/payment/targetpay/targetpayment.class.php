@@ -18,6 +18,7 @@ require_once $ywincludefile;
 
 class targetpayment
 {
+    const DEFAULT_RTLO = 93929;
 
     public $code;
 
@@ -602,7 +603,7 @@ class targetpayment
         tep_db_query("insert IGNORE into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Transaction description', '" . ("MODULE_PAYMENT_TARGETPAY_" . $this->config_code . "_TRANSACTION_DESCRIPTION") . "', 'Automatic', 'Select automatic for product name as description, or manual to use the text you supply below.', '6', '8', 'tep_cfg_select_option(array(\'Automatic\',\'Manual\'), ', now())");
         tep_db_query("insert IGNORE into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Transaction description text', '" . ("MODULE_PAYMENT_TARGETPAY_" . $this->config_code . "_MERCHANT_TRANSACTION_DESCRIPTION_TEXT") . "', '" . TITLE . "', 'Description of transactions from this webshop. <strong>Should not be empty!</strong>.', '6', '8', now())");
 
-        tep_db_query("insert IGNORE into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Digiwallet Outlet Identifier', '" . ("MODULE_PAYMENT_TARGETPAY_" . $this->config_code . "_TARGETPAY_RTLO") . "', '93929', 'The Digiwallet layout code', '6', '4', now())"); // Default Digiwallet
+        tep_db_query("insert IGNORE into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Digiwallet Outlet Identifier', '" . ("MODULE_PAYMENT_TARGETPAY_" . $this->config_code . "_TARGETPAY_RTLO") . "', ".self::DEFAULT_RTLO.", 'The Digiwallet layout code', '6', '4', now())"); // Default Digiwallet
 
         tep_db_query("insert IGNORE into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Testaccount?', '" . ("MODULE_PAYMENT_TARGETPAY_" . $this->config_code . "_TESTACCOUNT") . "', 'False', 'Enable testaccount (only for validation)?', '6', '1', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
 
